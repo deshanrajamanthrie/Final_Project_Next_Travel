@@ -9,12 +9,14 @@
         <outputRelativeToContentRoot value="true" />
         <module name="api-gateway" />
         <module name="vehicle_service" />
+        <module name="discoveryServer" />
       </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="api-gateway" options="-parameters" />
+      <module name="discoveryServer" options="-parameters" />
       <module name="vehicle_service" options="-parameters" />
     </option>
   </component>

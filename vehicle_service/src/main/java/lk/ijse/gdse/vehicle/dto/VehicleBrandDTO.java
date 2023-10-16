@@ -26,7 +26,7 @@ public class VehicleBrandDTO {
 
     private double fuel1km;
 
-    private VehicleCategory category;
+    private VehicleCategoryDTO category;
 
 
 }

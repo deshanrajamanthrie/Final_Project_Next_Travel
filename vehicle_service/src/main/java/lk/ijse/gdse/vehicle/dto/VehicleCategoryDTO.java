@@ -21,7 +21,7 @@ public class VehicleCategoryDTO {
     private String categoryType;
 
 
-    private List<VehicleBrand> vehicleBrands;
+    private List<VehicleBrandDTO> vehicleBrands;
 
     public VehicleCategoryDTO(long categoryId, String categoryType) {
         this.categoryId = categoryId;

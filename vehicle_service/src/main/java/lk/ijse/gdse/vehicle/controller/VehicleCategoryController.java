@@ -26,7 +26,7 @@ public class VehicleCategoryController {
        return service.updateCategory(dto);
     }
 
-    @GetMapping(path = "/getAll",produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<VehicleCategoryDTO> allGetCategory(){
        return service.findAllVehicleCategory();
     }
