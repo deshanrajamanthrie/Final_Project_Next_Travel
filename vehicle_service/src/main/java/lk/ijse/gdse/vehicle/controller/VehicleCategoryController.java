@@ -31,7 +31,7 @@ public class VehicleCategoryController {
        return service.findAllVehicleCategory();
     }
 
-    @GetMapping(params = {"type"},produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(path = "search",params = {"type"},produces = MediaType.APPLICATION_JSON_VALUE)
     public VehicleCategoryDTO searchCategory(@RequestParam("type") String ctype){
         return service.searchCategory(ctype);
     }

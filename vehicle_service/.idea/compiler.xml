@@ -10,6 +10,7 @@
         <module name="api-gateway" />
         <module name="vehicle_service" />
         <module name="discoveryServer" />
+        <module name="travel_service" />
       </profile>
     </annotationProcessing>
   </component>
@@ -17,6 +18,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="api-gateway" options="-parameters" />
       <module name="discoveryServer" options="-parameters" />
+      <module name="travel_service" options="-parameters" />
       <module name="vehicle_service" options="-parameters" />
     </option>
   </component>
