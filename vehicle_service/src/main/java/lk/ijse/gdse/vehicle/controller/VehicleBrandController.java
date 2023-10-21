@@ -5,7 +5,9 @@ import lk.ijse.gdse.vehicle.service.VehicleBrandService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -26,8 +28,11 @@ public class VehicleBrandController {
        return service.updateVehicleBrand(dto);
     }
 
-    public void
-
+    @PutMapping(path = "/image",params = "id",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public void uploadImage(@RequestPart MultipartFile file,@RequestParam  Long id) throws IOException {
+        VehicleBrandDTO vehicleBrandDTO = service.searchVehicleBrand(id);
+        vehicleBrandDTO.setImages(file.getBytes());
+    }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<VehicleBrandDTO>getAllVehicle(){

@@ -23,6 +23,8 @@ public class VehicleBrand {
 
     @Column(nullable = false,length = 45)
     private int seat;
+    @Column(nullable = false)
+    private int qty;
 
     private String fuelType;
 

@@ -19,6 +19,8 @@ public class VehicleBrandDTO {
 
     private int seat;
 
+    private int qty;
+
     private String fuelType;
 
 
@@ -31,8 +33,15 @@ public class VehicleBrandDTO {
 
     private VehicleCategory category;
 
+    public VehicleBrandDTO(long vehicleId, String brandName, int seat, int qty, String fuelType, double fee1km, double fuel1km, VehicleCategory category) {
+        this.vehicleId = vehicleId;
+        this.brandName = brandName;
+        this.seat = seat;
+        this.qty = qty;
+        this.fuelType = fuelType;
+        this.fee1km = fee1km;
+        this.fuel1km = fuel1km;
 
-
-
-
+        this.category = category;
+    }
 }
