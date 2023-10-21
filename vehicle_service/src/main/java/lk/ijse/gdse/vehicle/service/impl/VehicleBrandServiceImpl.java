@@ -7,9 +7,12 @@ import lk.ijse.gdse.vehicle.entity.VehicleCategory;
 import lk.ijse.gdse.vehicle.repo.VehicleBrandRepo;
 import lk.ijse.gdse.vehicle.service.VehicleBrandService;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @Transactional
@@ -22,6 +25,7 @@ public class VehicleBrandServiceImpl implements VehicleBrandService {
     ModelMapper mapper;
 
 
+    @Override
     public VehicleBrandDTO saveVehicleBrand(VehicleBrandDTO dto) {
         if (vehicleBrandRepo.existsById(dto.getVehicleId())) {
             throw new RuntimeException("Vehicle Already Exists!");
@@ -31,14 +35,37 @@ public class VehicleBrandServiceImpl implements VehicleBrandService {
         return dto;
     }
 
-
-    public VehicleCategoryDTO updateVehicleCategory(VehicleCategoryDTO dto){
-        if (!vehicleBrandRepo.existsById(dto.getCategoryId())){
-            throw  new RuntimeException("Vehicle CateGory Not Found!");
-        }else {
-            vehicleBrandRepo.save(mapper.map(dto,VehicleBrand.class));
+    @Override
+    public VehicleBrandDTO updateVehicleBrand(VehicleBrandDTO dto) {
+        if (!vehicleBrandRepo.existsById(dto.getVehicleId())) {
+            throw new RuntimeException("Vehicle not Found!");
+        } else {
+            vehicleBrandRepo.save(mapper.map(dto, VehicleBrand.class));
         }
-        return  dto;
+        return dto;
+    }
+    @Override
+    public List<VehicleBrandDTO> getAllVehicle() {
+        List<VehicleBrand> all = vehicleBrandRepo.findAll();
+        return mapper.map(all, new TypeToken<List<VehicleBrandDTO>>() {
+        }.getType());
+    }
+    @Override
+    public VehicleBrandDTO searchVehicleBrand(Long id) {
+        if (!vehicleBrandRepo.existsById(id)) {
+            throw new RuntimeException("Vehicle not Found!");
+        } else {
+            VehicleBrand vehicleBrand = vehicleBrandRepo.findById(id).get();
+            return mapper.map(vehicleBrand, VehicleBrandDTO.class);
+        }
+    }
+    @Override
+    public void deleteVehicleBrand(Long id){
+       if(!vehicleBrandRepo.existsById(id)){
+           throw new RuntimeException("Vehicle not Found!");
+       }else{
+           vehicleBrandRepo.delete(vehicleBrandRepo.findById(id).get());
+       }
     }
 
 

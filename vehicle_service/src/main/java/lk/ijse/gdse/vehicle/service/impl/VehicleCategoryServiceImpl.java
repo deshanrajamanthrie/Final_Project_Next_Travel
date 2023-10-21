@@ -24,6 +24,7 @@ public class VehicleCategoryServiceImpl implements VehicleCategoryService {
     ModelMapper mapper;
 
 
+    @Override
     public VehicleCategoryDTO saveCategory(VehicleCategoryDTO dto) {
         if (repo.existsById(dto.getCategoryId())) {
             throw new RuntimeException("Vehicle Category Has been Already Exists");
@@ -32,7 +33,7 @@ public class VehicleCategoryServiceImpl implements VehicleCategoryService {
         }
         return dto;
     }
-
+    @Override
     public VehicleCategoryDTO updateCategory(VehicleCategoryDTO dto) {
         if (repo.existsById(dto.getCategoryId())) {
             repo.save(mapper.map(dto, VehicleCategory.class));
@@ -41,7 +42,7 @@ public class VehicleCategoryServiceImpl implements VehicleCategoryService {
         }
         return dto;
     }
-
+    @Override
     public VehicleCategoryDTO searchCategory(String type) {
         if (type != null) {
             VehicleCategory category = repo.findVehicleCategoryByCategoryType(type);
@@ -53,6 +54,7 @@ public class VehicleCategoryServiceImpl implements VehicleCategoryService {
         }
     }
 
+    @Override
     public List<VehicleCategoryDTO>findAllVehicleCategory(){
         List<VehicleCategory> all = repo.findAll();
         for (VehicleCategory dto: all) {
@@ -62,6 +64,7 @@ public class VehicleCategoryServiceImpl implements VehicleCategoryService {
         }.getType());
     }
 
+    @Override
     public void deleteVehicleCategory(String type){
         if(type!=null){
             repo.delete(repo.findVehicleCategoryByCategoryType(type));

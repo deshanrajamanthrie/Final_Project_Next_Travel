@@ -1,15 +1,16 @@
 package lk.ijse.gdse.vehicle.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
+@Getter
+@Setter
+@ToString
 @Entity(name = "vehicleBrand")
 public class VehicleBrand {
     @Id
@@ -31,29 +32,15 @@ public class VehicleBrand {
     @Column(nullable = false,length = 45)
     private double fuel1km;
 
+    @Lob
+    @Column(name = "imageData",nullable = true,columnDefinition = "MEDIUMBLOB")
+    private byte[] images;
+
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "category_Id")
     private VehicleCategory category;
 
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "vehicleBrand",fetch = FetchType.LAZY)
-    private List<VehicleImage>images;
 
-    public VehicleBrand(long vehicleId, String brandName, int seat, String fuelType, double fee1km, double fuel1km) {
-        this.vehicleId = vehicleId;
-        this.brandName = brandName;
-        this.seat = seat;
-        this.fuelType = fuelType;
-        this.fee1km = fee1km;
-        this.fuel1km = fuel1km;
-    }
 
-    public VehicleBrand(long vehicleId, String brandName, int seat, String fuelType, double fee1km, double fuel1km, VehicleCategory category) {
-        this.vehicleId = vehicleId;
-        this.brandName = brandName;
-        this.seat = seat;
-        this.fuelType = fuelType;
-        this.fee1km = fee1km;
-        this.fuel1km = fuel1km;
-        this.category = category;
-    }
 }
