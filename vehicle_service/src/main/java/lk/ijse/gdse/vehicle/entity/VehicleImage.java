@@ -10,15 +10,19 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Builder
 public class VehicleImage {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long imageId;
+
+    @Column(nullable = false)
     private String name;
+
+    @Column(nullable = false)
     private String type;
+
     @Lob
-    @Column(name = "imageData")
+    @Column(name = "imageData",columnDefinition ="MEDIUMBLOB" )  //EXPAND THE IMAGE SIZE
     private byte[] vehicleImage;
 
     @ManyToOne
