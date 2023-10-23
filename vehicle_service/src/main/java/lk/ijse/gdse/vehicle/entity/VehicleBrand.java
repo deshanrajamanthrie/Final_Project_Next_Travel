@@ -39,7 +39,7 @@ public class VehicleBrand {
     private byte[] images;
 
     @ManyToOne
-    @JsonIgnore
+
     @JoinColumn(name = "category_Id")
     private VehicleCategory category;
 

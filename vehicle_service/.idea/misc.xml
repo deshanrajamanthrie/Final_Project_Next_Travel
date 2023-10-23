@@ -11,7 +11,13 @@
         <option value="$PROJECT_DIR$/../hotel_service/pom.xml" />
         <option value="$PROJECT_DIR$/../userService/pom.xml" />
         <option value="$PROJECT_DIR$/../user_Booking_service/pom.xml" />
+        <option value="$PROJECT_DIR$/../hotel-services/pom.xml" />
       </list>
+    </option>
+    <option name="ignoredFiles">
+      <set>
+        <option value="$PROJECT_DIR$/../hotel-service/pom.xml" />
+      </set>
     </option>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_16" project-jdk-name="corretto-17" project-jdk-type="JavaSDK">

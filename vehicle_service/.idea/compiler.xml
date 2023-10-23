@@ -8,9 +8,9 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="user_Booking_service" />
-        <module name="hotel_service" />
         <module name="api-gateway" />
         <module name="vehicle_service" />
+        <module name="hotel-services" />
         <module name="discoveryServer" />
         <module name="travel_service" />
         <module name="userService" />
@@ -18,13 +18,15 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="booking_service" target="17" />
+      <module name="hotel-service" target="17" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="api-gateway" options="-parameters" />
       <module name="discoveryServer" options="-parameters" />
-      <module name="hotel_service" options="-parameters" />
+      <module name="hotel-service" options="" />
+      <module name="hotel-services" options="-parameters" />
       <module name="travel_service" options="-parameters" />
       <module name="userService" options="-parameters" />
       <module name="user_Booking_service" options="-parameters" />
