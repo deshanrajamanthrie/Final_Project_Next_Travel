@@ -1,16 +1,10 @@
-package lk.ijse.gdse.hotelService.dto;
+package lk.ijse.gdse.hotel.dto;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.ElementCollection;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import lk.ijse.gdse.hotelService.entity.embeded.Contact;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
-
 
 
 @AllArgsConstructor

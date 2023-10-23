@@ -1,6 +1,5 @@
-package lk.ijse.gdse.hotelService.dto;
+package lk.ijse.gdse.hotel.dto;
 
-import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

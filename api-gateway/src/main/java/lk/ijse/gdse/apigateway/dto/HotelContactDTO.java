@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ContactDTO {
+public class HotelContactDTO {
     private String email;
 
     private int contactNum1;

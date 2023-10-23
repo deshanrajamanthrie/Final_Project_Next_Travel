@@ -1,8 +1,7 @@
-package lk.ijse.gdse.hotelService.service;
+package lk.ijse.gdse.hotel.service;
 
-import lk.ijse.gdse.hotelService.dto.HotelDTO;
-import lk.ijse.gdse.hotelService.entity.Hotel;
-import org.modelmapper.TypeToken;
+import lk.ijse.gdse.hotel.dto.HotelDTO;
+
 
 import java.util.List;
 

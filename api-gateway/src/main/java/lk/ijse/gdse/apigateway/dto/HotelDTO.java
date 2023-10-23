@@ -1,13 +1,13 @@
-package lk.ijse.gdse.apigateway.dto.hotelDTO;
+package lk.ijse.gdse.apigateway.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
+@Getter
+@Setter
+@ToString
 public class HotelDTO {
     private String id;
 
@@ -19,7 +19,7 @@ public class HotelDTO {
     private String location;
 
 
-    private List<ContactDTO> contacts;
+    private List<HotelContactDTO> contacts;
 
     private String pets;
 

@@ -1,5 +1,6 @@
 package lk.ijse.gdse.travelService.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lk.ijse.gdse.travelService.entity.embeded.Date;
 import lombok.AllArgsConstructor;

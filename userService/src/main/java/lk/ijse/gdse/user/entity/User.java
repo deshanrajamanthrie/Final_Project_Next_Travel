@@ -1,12 +1,13 @@
 package lk.ijse.gdse.user.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import java.util.List;
 
 
-@Data
+@Getter
+@Setter
+@ToString
 @AllArgsConstructor
 @Entity(name = "user_Table")
 @NoArgsConstructor
@@ -26,12 +27,13 @@ public class User {
     @Column(nullable = false,length = 45)
     private String password;
 
+    @OneToMany(mappedBy = "user",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    //@JoinColumn(name = "bookingId")
+    @Column(name = "booking_Id")
+    private List<Booking>bookings;
 
-    /*public  User(){
-        UserIdGenerator uuid = new UserIdGenerator();
-        Serializable generate = uuid.generate();
-        this.userId=generate.toString();
-    }*/
+
+
 
 
 

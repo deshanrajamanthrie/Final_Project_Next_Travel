@@ -20,6 +20,6 @@ public class TravelDTO {
     private int noAdult;
     private int headCount;
     private double paidValue;
-    private PackageCategory packageCategory;
+    private PackageCategoryDTO packageCategory;
 
 }

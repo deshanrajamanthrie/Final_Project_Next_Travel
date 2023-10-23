@@ -22,7 +22,6 @@ public class PackageCategory {
 
     @ToString.Exclude
     @OneToMany(mappedBy = "packageCategory",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    @JsonIgnore
     private List<Travel>travels;
 
 

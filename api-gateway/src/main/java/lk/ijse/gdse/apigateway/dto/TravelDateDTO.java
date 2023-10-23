@@ -1,2 +1,15 @@
-package lk.ijse.gdse.apigateway.dto;public class DateDTO {
+package lk.ijse.gdse.apigateway.dto;
+
+import lombok.*;
+
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
+@ToString
+public class TravelDateDTO {
+
+    private String startDate;
+
+    private String endDate;
 }

@@ -1,10 +1,8 @@
 package lk.ijse.gdse.guide.entity;
 
 import jakarta.persistence.Column;
-import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import lk.ijse.gdse.guide.entity.embeded.Contact;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,10 +19,9 @@ public class Guide {
     private String name;
     private String nic;
 
-    @Embedded
-    private Contact num1;
-    @Embedded
-    private Contact email;
+
+    private int num1;
+
 
     private String address;
     @Column(name = "payment",nullable = false)

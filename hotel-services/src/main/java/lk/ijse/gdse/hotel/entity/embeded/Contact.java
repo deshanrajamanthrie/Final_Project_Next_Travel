@@ -1,4 +1,4 @@
-package lk.ijse.gdse.hotelService.entity.embeded;
+package lk.ijse.gdse.hotel.entity.embeded;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;

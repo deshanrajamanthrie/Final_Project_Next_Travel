@@ -1,9 +1,10 @@
-package lk.ijse.gdse.hotelService.service.impl;
+package lk.ijse.gdse.hotel.service.impl;
 
-import lk.ijse.gdse.hotelService.dto.HotelDTO;
-import lk.ijse.gdse.hotelService.entity.Hotel;
-import lk.ijse.gdse.hotelService.repo.HotelRepo;
-import lk.ijse.gdse.hotelService.service.HotelService;
+import lk.ijse.gdse.hotel.dto.HotelDTO;
+import lk.ijse.gdse.hotel.entity.Hotel;
+import lk.ijse.gdse.hotel.repo.HotelRepo;
+import lk.ijse.gdse.hotel.service.HotelService;
+
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;

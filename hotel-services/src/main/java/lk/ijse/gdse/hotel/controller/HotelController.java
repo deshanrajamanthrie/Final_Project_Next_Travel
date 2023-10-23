@@ -1,7 +1,7 @@
-package lk.ijse.gdse.hotelService.controller;
+package lk.ijse.gdse.hotel.controller;
 
-import lk.ijse.gdse.hotelService.dto.HotelDTO;
-import lk.ijse.gdse.hotelService.service.HotelService;
+import lk.ijse.gdse.hotel.dto.HotelDTO;
+import lk.ijse.gdse.hotel.service.HotelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;

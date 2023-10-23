@@ -47,7 +47,7 @@ public class TravelServiceImpl implements TravelService {
             System.out.println(v.toString());
         });
         for (Travel travel: all) {
-            travel.getPackageCategory().setTravels(null);
+          travel.getPackageCategory().setTravels(null);
 
         }
         return mapper.map(all,new TypeToken<List<TravelDTO>>(){

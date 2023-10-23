@@ -1,7 +1,7 @@
-package lk.ijse.gdse.hotelService.entity;
+package lk.ijse.gdse.hotel.entity;
 
 import jakarta.persistence.*;
-import lk.ijse.gdse.hotelService.entity.embeded.Contact;
+import lk.ijse.gdse.hotel.entity.embeded.Contact;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
