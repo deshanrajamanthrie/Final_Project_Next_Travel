@@ -24,6 +24,7 @@ public class VehicleCategory {
 
 
     @OneToMany(mappedBy = "category",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @ToString.Exclude
     @JsonIgnore
     private List<VehicleBrand>vehicleBrands;
 

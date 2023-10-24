@@ -38,6 +38,8 @@ public class VehicleBrand {
     @Column(name = "imageData",nullable = true,columnDefinition = "MEDIUMBLOB")
     private byte[] images;
 
+    @ToString.Exclude
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "category_Id")
     private VehicleCategory category;

@@ -10,8 +10,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin
-@RequestMapping("api/v1/category")
-
+@RequestMapping("api/v1/cate")
 public class VehicleCategoryController {
     @Autowired
     VehicleCategoryService service;
