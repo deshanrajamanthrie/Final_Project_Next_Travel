@@ -26,8 +26,8 @@ public class VehicleBrandDTO {
 
     private double fee1km;
 
-
     private double fuel1km;
+    private double feeForOneDay;
 
     private byte[] images;
 

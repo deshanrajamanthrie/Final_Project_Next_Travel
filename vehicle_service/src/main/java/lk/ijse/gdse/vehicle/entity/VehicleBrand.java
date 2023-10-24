@@ -34,6 +34,9 @@ public class VehicleBrand {
     @Column(nullable = false,length = 45)
     private double fuel1km;
 
+    @Column(nullable = false,length = 45)
+    private double feeForOneDay;
+
     @Lob
     @Column(name = "imageData",nullable = true,columnDefinition = "MEDIUMBLOB")
     private byte[] images;
