@@ -14,7 +14,7 @@ import java.util.Arrays;
 @RestController
 @RequestMapping("api/v1/consume/users")
 @CrossOrigin
-public class UserController {
+public class UsersController {
 
     @Autowired
     RestTemplate rest;
@@ -31,18 +31,17 @@ public class UserController {
         return ResponseEntity.ok(new ResponseUtil(200,"Save User Successfully",null));
     }
 
-    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE,params = {"id"})
-    public ResponseEntity<ResponseUtil> getUser(@RequestParam Long id){
-        UserDTO forObject = rest.getForObject("http://localhost:8084/api/v1/user/search?=id" + id, UserDTO.class);
+    @GetMapping(path = "/searchId",params = {"id"},produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<ResponseUtil> getUser(@RequestParam("id") Long uId){
+        UserDTO forObject = rest.getForObject("http://localhost:8084/api/v1/user/search?id="+uId, UserDTO.class);
         return ResponseEntity.ok(new ResponseUtil(200,"Get  a User",forObject));
 
     }
 
-    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE,params = {"id"})
-    public ResponseEntity<ResponseUtil> getUserName(@RequestParam String type){
-        UserDTO forObject = rest.getForObject("http://localhost:8084/api/v1/user/search?=id" + type, UserDTO.class);
+    @GetMapping(path = "searchType",produces = MediaType.APPLICATION_JSON_VALUE,params = {"type"})
+    public ResponseEntity<ResponseUtil> getUserName(@RequestParam("type")  String name){
+        UserDTO forObject = rest.getForObject("http://localhost:8084/api/v1/user/searchName?name=" + name, UserDTO.class);
         return ResponseEntity.ok(new ResponseUtil(200,"Get a User",forObject));
-
     }
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)

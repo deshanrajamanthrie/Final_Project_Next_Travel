@@ -30,6 +30,7 @@ public class User {
     @OneToMany(mappedBy = "user",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     //@JoinColumn(name = "bookingId")
     @Column(name = "booking_Id")
+    @ToString.Exclude
     private List<Booking>bookings;
 
 

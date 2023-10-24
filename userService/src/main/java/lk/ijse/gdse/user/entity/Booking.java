@@ -36,6 +36,7 @@ public class Booking {
     @Column(nullable = false)
     private String paymentStatus;
 
+    @ToString.Exclude
     @ManyToOne
     @JoinColumn(name = "user_Id")
     private User user;

@@ -13,9 +13,7 @@ public class ApiGateWayInitializer {
     public static void main(String[] args) {
         SpringApplication.run(ApiGateWayInitializer.class);
     }
-
     @Bean
-
     public RestTemplate restTemplate(){
       return new RestTemplate();
     }
