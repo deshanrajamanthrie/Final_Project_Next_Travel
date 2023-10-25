@@ -29,7 +29,7 @@ public class VehicleBrandController {
     }
 
 
-    @PutMapping(path = "/image",params = "id",consumes = MediaType.ALL_VALUE)
+    @PutMapping(path = "image",params = "id",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public void uploadImage(@RequestPart MultipartFile file,@RequestParam  Long id) throws IOException {
         VehicleBrandDTO vehicleBrandDTO = service.searchVehicleBrand(id);
         vehicleBrandDTO.setImages(file.getBytes());
