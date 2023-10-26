@@ -1,5 +1,6 @@
 package lk.ijse.gdse.user.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import java.util.List;
@@ -31,6 +32,7 @@ public class User {
     //@JoinColumn(name = "bookingId")
     @Column(name = "booking_Id")
     @ToString.Exclude
+    @JsonIgnore
     private List<Booking>bookings;
 
 

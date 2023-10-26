@@ -1,5 +1,6 @@
 package lk.ijse.gdse.user.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -38,6 +39,7 @@ public class Booking {
 
     @ToString.Exclude
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "user_Id")
     private User user;
 

@@ -37,7 +37,11 @@ public class UserServiceImpl implements UserService {
 
 
     public List<UserDTO> getAllUser() {
-        return mapper.map(repo.findAll(), new TypeToken<List<UserDTO>>() {
+        List<User> all = repo.findAll();
+        for (User user: all) {
+        user.setBookings(null);
+        }
+        return mapper.map(all, new TypeToken<List<UserDTO>>() {
         }.getType());
     }
 
@@ -46,7 +50,9 @@ public class UserServiceImpl implements UserService {
         if(!repo.existsById(id)){
             throw  new RuntimeException("User Not Found!");
         }
-        return mapper.map(repo.findById(id).get(), UserDTO.class);
+        User user = repo.findById(id).get();
+        user.setBookings(null);
+        return mapper.map(user, UserDTO.class);
     }
 
     public void deleteUser(Long id) {

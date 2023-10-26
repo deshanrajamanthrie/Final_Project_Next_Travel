@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Transactional
 @Service
@@ -40,14 +41,22 @@ public class BookingServiceImpl implements BookingService {
     }
 
     public List<BookingDTO> getAllBooking(){
-        return mapper.map(repo.findAll(),new TypeToken<List<BookingDTO>>(){}.getType());
+        List<Booking> all = repo.findAll();
+        for (Booking booking: all) {
+            booking.getUser().setBookings(null);
+        }
+        return mapper.map(all,new TypeToken<List<BookingDTO>>(){}.getType());
     }
 
     public BookingDTO searchBook(Long  id){
         if(!repo.existsById(id)){
             throw new RuntimeException("Booking NotFound!");
         }else{
-            return mapper.map(repo.findById(id).get(),BookingDTO.class);
+
+            Booking booking = repo.findById(id).get();
+            booking.getUser().setBookings(null);
+
+            return mapper.map(booking,BookingDTO.class);
         }
     }
 

@@ -16,6 +16,7 @@ import java.util.Arrays;
 @CrossOrigin
 public class GuideController {
 
+
     @Autowired
     RestTemplate rest;
 

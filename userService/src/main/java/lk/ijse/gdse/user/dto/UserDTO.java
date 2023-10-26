@@ -1,13 +1,16 @@
 package lk.ijse.gdse.user.dto;
 
 import jakarta.persistence.Column;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lk.ijse.gdse.user.entity.Booking;
+import lombok.*;
+
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
+@Getter
+@Setter
+@ToString
 public class UserDTO {
     private long id;
     private String name;
@@ -15,4 +18,5 @@ public class UserDTO {
     private String address;
     private String email;
     private String password;
+    private List<BookingDTO> bookings;
 }

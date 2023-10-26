@@ -16,47 +16,48 @@ import java.util.Arrays;
 @CrossOrigin
 public class UsersController {
 
+    private final String url = "http://deshanz-vivobook:8084/api/v1/user";
+
     @Autowired
     RestTemplate rest;
 
+
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ResponseUtil> getAllUser(){
-        UserDTO[] forObject = rest.getForObject("http://localhost:8084/api/v1/user", UserDTO[].class);
-        return ResponseEntity.ok(new ResponseUtil(200,"Get All Successfully", Arrays.asList(forObject)));
+    public ResponseEntity<ResponseUtil> getAllUser() {
+        UserDTO[] forObject = rest.getForObject(url, UserDTO[].class);
+        return ResponseEntity.ok(new ResponseUtil(200, "Get All Successfully", Arrays.asList(forObject)));
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ResponseUtil> postAllUser(@RequestBody UserDTO dto){
-        rest.postForEntity("http://localhost:8084/api/v1/user",dto,UserDTO.class);
-        return ResponseEntity.ok(new ResponseUtil(200,"Save User Successfully",null));
+    public ResponseEntity<ResponseUtil> postAllUser(@RequestBody UserDTO dto) {
+        rest.postForEntity(url, dto, UserDTO.class);
+        return ResponseEntity.ok(new ResponseUtil(200, "Save User Successfully", null));
     }
 
-    @GetMapping(path = "/searchId",params = {"id"},produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ResponseUtil> getUser(@RequestParam("id") Long uId){
-        UserDTO forObject = rest.getForObject("http://localhost:8084/api/v1/user/search?id="+uId, UserDTO.class);
-        return ResponseEntity.ok(new ResponseUtil(200,"Get  a User",forObject));
+    @GetMapping(path = "/searchId", params = {"id"}, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<ResponseUtil> getUser(@RequestParam("id") Long uId) {
+        UserDTO forObject = rest.getForObject(url + "/search?id=" + uId, UserDTO.class);
+        return ResponseEntity.ok(new ResponseUtil(200, "Get  a User", forObject));
 
     }
 
-    @GetMapping(path = "searchType",produces = MediaType.APPLICATION_JSON_VALUE,params = {"type"})
-    public ResponseEntity<ResponseUtil> getUserName(@RequestParam("type")  String name){
-        UserDTO forObject = rest.getForObject("http://localhost:8084/api/v1/user/searchName?name=" + name, UserDTO.class);
-        return ResponseEntity.ok(new ResponseUtil(200,"Get a User",forObject));
+    @GetMapping(path = "searchType", produces = MediaType.APPLICATION_JSON_VALUE, params = {"type"})
+    public ResponseEntity<ResponseUtil> getUserName(@RequestParam("type") String name) {
+        UserDTO forObject = rest.getForObject(url+"/searchName?name=" + name, UserDTO.class);
+        return ResponseEntity.ok(new ResponseUtil(200, "Get a User", forObject));
     }
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void putUser(@RequestBody UserDTO dto){
-        rest.put("http://localhost:8084/api/v1/user",dto,UserDTO.class);
+    public ResponseEntity<ResponseUtil> putUser(@RequestBody UserDTO dto) {
+        rest.put(url, dto, UserDTO.class);
+        return ResponseEntity.ok(new ResponseUtil(200, "Update Successfully!", null));
     }
 
     @DeleteMapping(params = {"id"})
-    public void deleteUser(@RequestParam Long id){
-        rest.delete("http://localhost:8084/api/v1/user?id="+id,UserDTO.class);
-
+    public ResponseEntity<ResponseUtil> deleteUser(@RequestParam Long id) {
+        rest.delete(url+"?id=" + id, UserDTO.class);
+        return ResponseEntity.ok(new ResponseUtil(200, "Delete Successfully!", null));
     }
-
-
-
 
 
 }
