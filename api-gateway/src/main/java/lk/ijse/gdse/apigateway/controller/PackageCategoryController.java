@@ -18,36 +18,41 @@ import java.util.Arrays;
 @CrossOrigin
 public class PackageCategoryController {
 
+    private final String url="http://deshanz-vivobook:8082/api/v1/mainPackage";
+
     @Autowired
     RestTemplate rest;
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ResponseUtil> getAllPackageCategory() {
-        PackageCategoryDTO[] forObject = rest.getForObject("http://localhost:8082/api/v1/mainPackage", PackageCategoryDTO[].class);
+        PackageCategoryDTO[] forObject = rest.getForObject(url, PackageCategoryDTO[].class);
         return ResponseEntity.ok(new ResponseUtil(200, "GetAll Successfully", Arrays.asList(forObject)));
     }
 
+
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ResponseUtil> postCategory(@RequestBody PackageCategoryDTO dto) {
-        rest.postForEntity("http://localhost:8082/api/v1/mainPackage", dto, PackageCategoryDTO.class);
+        rest.postForEntity(url, dto, PackageCategoryDTO.class);
         return ResponseEntity.ok(new ResponseUtil(200, "Guide Save Successfully!", null));
     }
 
 
     @GetMapping(params = {"id"}, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ResponseUtil> searchPackage(@RequestParam String id) {
-        PackageCategoryDTO forObject = rest.getForObject("http://localhost:8082/api/v1/mainPackage?id=" + id, PackageCategoryDTO.class);
+        PackageCategoryDTO forObject = rest.getForObject(url+"?id=" + id, PackageCategoryDTO.class);
         return ResponseEntity.ok(new ResponseUtil(200, "Get This Guide Successfully", forObject));
     }
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void updatePackage(@RequestBody PackageCategoryDTO dto) {
-        rest.put("http://localhost:8082/api/v1/mainPackage", dto, PackageCategoryDTO.class);
+    public ResponseEntity<ResponseUtil> updatePackage(@RequestBody PackageCategoryDTO dto) {
+        rest.put(url, dto, PackageCategoryDTO.class);
+        return ResponseEntity.ok(new ResponseUtil(200,"Update Successfully!",null));
     }
 
     @DeleteMapping(params = {"id"})
-    public void deletePackage(@RequestParam("id") String pId) {
-        rest.delete("http://localhost:8082/api/v1/mainPackage?id="+ pId,PackageCategoryDTO.class);
+    public ResponseEntity<ResponseUtil> deletePackage(@RequestParam("id") String pId) {
+        rest.delete(url+"?id="+ pId,PackageCategoryDTO.class);
+        return ResponseEntity.ok(new ResponseUtil(200,"Delete Successfully",null));
     }
 
 

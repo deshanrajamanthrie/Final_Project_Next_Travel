@@ -16,36 +16,40 @@ import java.util.Arrays;
 @RestController
 public class TravelController {
 
+    private  final String  url="http://deshanz-vivobook:8082/api/v1/travel";
+
     @Autowired
     RestTemplate restTemplate;
 
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity <ResponseUtil>getAllTravel(){
-        TravelDTO[] forObject = restTemplate.getForObject("http://localhost:8082/api/v1/travel", TravelDTO[].class);
+        TravelDTO[] forObject = restTemplate.getForObject(url, TravelDTO[].class);
         return  ResponseEntity.ok(new ResponseUtil(200,"Get All Successfully", Arrays.asList(forObject)));
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ResponseUtil>postAllTravel(@RequestBody TravelDTO dto){
-        restTemplate.postForEntity("http://localhost:8082/api/v1/travel",dto,TravelDTO.class);
+        restTemplate.postForEntity(url,dto,TravelDTO.class);
         return ResponseEntity.ok(new ResponseUtil(200,"Post Successfully",null));
     }
 
     @GetMapping(params = {"id"},produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ResponseUtil>getTravel(@RequestParam String id){
-        TravelDTO forObject = restTemplate.getForObject("http://localhost:8082/api/v1/travel/search?id=" + id, TravelDTO.class);
+        TravelDTO forObject = restTemplate.getForObject(url+"/search?id=" + id, TravelDTO.class);
         return  ResponseEntity.ok(new ResponseUtil(200,"Get Travel Successfully!",forObject));
     }
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void putTravel(@RequestBody TravelDTO dto){
-        restTemplate.put("http://localhost:8082/api/v1/travel",dto,TravelDTO.class);
+    public ResponseEntity<ResponseUtil> putTravel(@RequestBody TravelDTO dto){
+        restTemplate.put(url,dto,TravelDTO.class);
+        return ResponseEntity.ok(new ResponseUtil(200,"Update Successfully!",null));
     }
 
     @DeleteMapping(params = {"id"})
-    public void  deleteTravel(@RequestParam String id){
+    public ResponseEntity<ResponseUtil>  deleteTravel(@RequestParam String id){
         restTemplate.delete("http://localhost:8082/api/v1/travel?id="+id,TravelDTO.class);
+        return ResponseEntity.ok(new ResponseUtil(200,"Delete Successfully!",null));
     }
 
 
