@@ -33,14 +33,14 @@ public class PackageCategoryController {
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ResponseUtil> postCategory(@RequestBody PackageCategoryDTO dto) {
         rest.postForEntity(url, dto, PackageCategoryDTO.class);
-        return ResponseEntity.ok(new ResponseUtil(200, "Guide Save Successfully!", null));
+        return ResponseEntity.ok(new ResponseUtil(200, " Save Successfully!", null));
     }
 
 
     @GetMapping(params = {"id"}, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ResponseUtil> searchPackage(@RequestParam String id) {
         PackageCategoryDTO forObject = rest.getForObject(url+"?id=" + id, PackageCategoryDTO.class);
-        return ResponseEntity.ok(new ResponseUtil(200, "Get This Guide Successfully", forObject));
+        return ResponseEntity.ok(new ResponseUtil(200, "Get  Successfully", forObject));
     }
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)

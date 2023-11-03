@@ -38,7 +38,7 @@ public class GuideController {
         return service.searchGuide(guideId);
     }
 
-    @DeleteMapping(params = "id")
+    @DeleteMapping(params = {"id"})
     public void deleteHotel(@RequestParam("id")String guideId){
         service .deleteGuide(guideId);
 

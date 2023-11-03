@@ -45,22 +45,23 @@ public class GuideServiceImpl implements GuideService {
         repo.findAll().stream().forEach(v -> {
             System.out.println(v.toString());
         });
-        return mapper.map(repo.findAll(),new TypeToken<List<GuideDTO>>(){}.getType());
+        return mapper.map(repo.findAll(), new TypeToken<List<GuideDTO>>() {
+        }.getType());
     }
 
-    public GuideDTO searchGuide(String id){
-        if(!repo.existsById(id)){
-            throw  new RuntimeException("Guide Has been Not Found!");
-        }else {
-            return mapper.map(repo.findById(id).get(),GuideDTO.class);
+    public GuideDTO searchGuide(String id) {
+        if (!repo.existsById(id)) {
+            throw new RuntimeException("Guide Has been Not Found!");
+        } else {
+            return mapper.map(repo.findById(id).get(), GuideDTO.class);
         }
     }
 
-    public void deleteGuide(String id){
-        if(!repo.existsById(id)){
-            throw  new RuntimeException("Guide Has been Not Found!");
-        }else {
+    public void deleteGuide(String id) {
+        if (repo.existsById(id)) {
             repo.delete(repo.findById(id).get());
+        } else {
+            throw new RuntimeException("Guide Has been Not Found!");
         }
     }
 

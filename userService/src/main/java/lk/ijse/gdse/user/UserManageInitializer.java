@@ -16,5 +16,4 @@ public class UserManageInitializer {
         return new ModelMapper();
     }
 
-
 }

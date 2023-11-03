@@ -43,8 +43,14 @@ public class UsersController {
 
     @GetMapping(path = "searchType", produces = MediaType.APPLICATION_JSON_VALUE, params = {"type"})
     public ResponseEntity<ResponseUtil> getUserName(@RequestParam("type") String name) {
-        UserDTO forObject = rest.getForObject(url+"/searchName?name=" + name, UserDTO.class);
+        UserDTO forObject = rest.getForObject(url + "/searchName?name=" + name, UserDTO.class);
         return ResponseEntity.ok(new ResponseUtil(200, "Get a User", forObject));
+    }
+
+    @GetMapping(path = "/myEmail", params = {"email"}, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<ResponseUtil> getUserEmail(@RequestParam("email") String uEmail) {
+        UserDTO forObject = rest.getForObject(url+"?emailType=" + uEmail, UserDTO.class);
+        return ResponseEntity.ok(new ResponseUtil(200, "Get  a User", forObject));
     }
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -55,7 +61,7 @@ public class UsersController {
 
     @DeleteMapping(params = {"id"})
     public ResponseEntity<ResponseUtil> deleteUser(@RequestParam Long id) {
-        rest.delete(url+"?id=" + id, UserDTO.class);
+        rest.delete(url + "?id=" + id, UserDTO.class);
         return ResponseEntity.ok(new ResponseUtil(200, "Delete Successfully!", null));
     }
 

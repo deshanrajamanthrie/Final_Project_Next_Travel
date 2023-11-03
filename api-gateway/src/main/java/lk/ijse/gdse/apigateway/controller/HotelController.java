@@ -1,12 +1,13 @@
 package lk.ijse.gdse.apigateway.controller;
 
-import lk.ijse.gdse.apigateway.dto.HotelDTO;
+
 import lk.ijse.gdse.apigateway.util.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
+import lk.ijse.gdse.apigateway.dto.HotelDTO;
 
 import java.util.Arrays;
 
@@ -29,6 +30,7 @@ public class HotelController {
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ResponseUtil> postHotel(@RequestBody HotelDTO dto){
         ResponseEntity<HotelDTO> hotelDTOResponseEntity = rest.postForEntity(url, dto, HotelDTO.class);
+        System.out.println(dto.toString());
         return ResponseEntity.ok(new ResponseUtil(200,"Added Successfully",null));
     }
     @GetMapping(params = {"id"},produces =MediaType.APPLICATION_JSON_VALUE)

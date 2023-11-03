@@ -45,10 +45,10 @@ public class GuideController {
         return ResponseEntity.ok(new ResponseUtil(200,"Update Successfully!",null));
     }
 
-    @DeleteMapping(params = "id")
-    public  ResponseEntity<ResponseUtil> deleteGuide(@RequestParam String id){
-        rest.delete(url+"?id=",id,GuideDTO.class);
-        return ResponseEntity.ok(new ResponseUtil(200,"Delete Successfully !",null));
+    @DeleteMapping(params = {"id"},produces = MediaType.APPLICATION_JSON_VALUE)
+    public  ResponseEntity<ResponseUtil> deleteGuide(@RequestParam("id") String gId){
+        rest.delete(url+"?id="+gId,GuideDTO.class);
+        return ResponseEntity.ok(new ResponseUtil(200,"Delete Successfully!",null));
     }
 
 }

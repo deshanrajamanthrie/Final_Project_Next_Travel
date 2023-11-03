@@ -19,7 +19,8 @@ public class HotelController {
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public HotelDTO postHotel(@RequestBody HotelDTO dto){
-       return service.saveHotel(dto);
+        System.out.println(dto.toString());
+        return service.saveHotel(dto);
     }
 
 

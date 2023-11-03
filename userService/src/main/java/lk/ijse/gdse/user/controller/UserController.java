@@ -1,11 +1,12 @@
 package lk.ijse.gdse.user.controller;
 
-import lk.ijse.gdse.user.dto.UserDTO;
-import lk.ijse.gdse.user.service.UserService;
+/*import lk.ijse.gdse.user.dto.UserDTO;
+import lk.ijse.gdse.user.service.UserService;*/
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
-
+import lk.ijse.gdse.user.dto.UserDTO;
+import lk.ijse.gdse.user.service.UserService;
 import java.util.List;
 
 @RestController
@@ -34,18 +35,24 @@ public class UserController {
 
 
     @DeleteMapping(params = {"id"})
-    public void deleteUSer(@RequestParam("id") Long uId){
+    public void deleteUSer(@RequestParam("id") Long uId) {
         service.deleteUser(uId);
     }
 
-    @GetMapping(path = "/search",params = {"id"})
-    public UserDTO searchUser(@RequestParam("id")Long uId){
+    @GetMapping(path = "/search", params = {"id"})
+    public UserDTO searchUser(@RequestParam("id") Long uId) {
         return service.searchUser(uId);
     }
 
 
-    @GetMapping(path = "/searchName",params = {"name"})
-    public UserDTO searchUserName(@RequestParam("name")String mName){
+    @GetMapping(path = "/searchName", params = {"name"})
+    public UserDTO searchUserName(@RequestParam("name") String mName) {
         return service.searchUserName(mName);
+    }
+
+    @GetMapping(params = {"emailType"},produces = MediaType.APPLICATION_JSON_VALUE)
+    public UserDTO searchUserEmail(@RequestParam("emailType") String uEmail) {
+        return service.searchUserEmail(uEmail);
+
     }
 }
