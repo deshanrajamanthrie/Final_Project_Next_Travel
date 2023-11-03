@@ -16,17 +16,18 @@ import java.util.List;
 public class VehicleCategory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(nullable = false,length = 45)
+
+    @Column(nullable = false, length = 45)
     private long categoryId;
 
-    @Column(nullable = false,length = 45)
+    @Column(nullable = false, length = 45)
     private String categoryType;
 
 
-    @OneToMany(mappedBy = "category",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @ToString.Exclude
     @JsonIgnore
-    private List<VehicleBrand>vehicleBrands;
+    private List<VehicleBrand> vehicleBrands;
 
     public VehicleCategory(long categoryId, String categoryType) {
         this.categoryId = categoryId;

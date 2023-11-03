@@ -17,6 +17,7 @@ public class VehicleCategoryController {
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
     public VehicleCategoryDTO postCategory(@RequestBody VehicleCategoryDTO dto){
+        System.out.println(dto.toString());
         return service.saveCategory(dto);
     }
 

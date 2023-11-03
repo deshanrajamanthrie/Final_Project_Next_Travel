@@ -47,6 +47,7 @@ public class VehicleBrandServiceImpl implements VehicleBrandService {
     @Override
     public List<VehicleBrandDTO> getAllVehicle() {
         List<VehicleBrand> all = vehicleBrandRepo.findAll();
+
         return mapper.map(all, new TypeToken<List<VehicleBrandDTO>>() {
         }.getType());
     }
