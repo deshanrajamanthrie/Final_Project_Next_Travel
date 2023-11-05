@@ -15,8 +15,9 @@ import java.util.Collection;
 @Entity(name = "select_Travel_Table")
 public class Travel {
     @Id
-    @Column(name = "travel_Id",length = 20,nullable = false)
-    private String id;
+    @Column(name = "travel_Id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
 
     @Column(nullable = false,length = 45)
     private String travelArea;

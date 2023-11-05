@@ -12,7 +12,7 @@ import java.util.Arrays;
 
 
 @RestController
-@RequestMapping("api/v1/mainGuide")
+@RequestMapping("api/v1/consume/guide")
 @CrossOrigin
 public class GuideController {
 

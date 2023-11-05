@@ -9,7 +9,7 @@ import java.util.Collection;
 @Setter
 @ToString
 public class TravelDTO {
-    private String id;
+    private long id;
     private String travelArea;
     private Collection<TravelDateDTO> dates;
     private int countDays;

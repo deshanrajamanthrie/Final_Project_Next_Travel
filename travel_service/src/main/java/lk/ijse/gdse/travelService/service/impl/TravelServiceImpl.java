@@ -54,7 +54,7 @@ public class TravelServiceImpl implements TravelService {
         }.getType());
     }
 
-    public TravelDTO searchTravel(String id){
+    public TravelDTO searchTravel(Long id){
         if(!repo.existsById(id)){
             throw  new RuntimeException("Travel Has been Not found!");
         }else{
@@ -65,7 +65,7 @@ public class TravelServiceImpl implements TravelService {
     }
 
 
-    public void deleteTravel(String id){
+    public void deleteTravel(Long id){
         if(!repo.existsById(id)){
             throw  new RuntimeException("Travel Has been Not found!");
         }else{

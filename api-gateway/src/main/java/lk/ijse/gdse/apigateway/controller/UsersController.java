@@ -6,13 +6,14 @@ import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Arrays;
 
 @RestController
-@RequestMapping("api/v1/consume/users")
+@RequestMapping("api/v1/consume/user")
 @CrossOrigin
 public class UsersController {
 
@@ -22,14 +23,18 @@ public class UsersController {
     RestTemplate rest;
 
 
+    @Autowired
+    PasswordEncoder encoder;
+
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ResponseUtil> getAllUser() {
         UserDTO[] forObject = rest.getForObject(url, UserDTO[].class);
         return ResponseEntity.ok(new ResponseUtil(200, "Get All Successfully", Arrays.asList(forObject)));
     }
 
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(path = "register", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ResponseUtil> postAllUser(@RequestBody UserDTO dto) {
+        dto.setPassword(encoder.encode(dto.getPassword()));
         rest.postForEntity(url, dto, UserDTO.class);
         return ResponseEntity.ok(new ResponseUtil(200, "Save User Successfully", null));
     }
@@ -49,12 +54,13 @@ public class UsersController {
 
     @GetMapping(path = "/myEmail", params = {"email"}, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ResponseUtil> getUserEmail(@RequestParam("email") String uEmail) {
-        UserDTO forObject = rest.getForObject(url+"?emailType=" + uEmail, UserDTO.class);
+        UserDTO forObject = rest.getForObject(url + "/myEmail?email=" + uEmail, UserDTO.class);
         return ResponseEntity.ok(new ResponseUtil(200, "Get  a User", forObject));
     }
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ResponseUtil> putUser(@RequestBody UserDTO dto) {
+        dto.setPassword(encoder.encode(dto.getPassword()));
         rest.put(url, dto, UserDTO.class);
         return ResponseEntity.ok(new ResponseUtil(200, "Update Successfully!", null));
     }

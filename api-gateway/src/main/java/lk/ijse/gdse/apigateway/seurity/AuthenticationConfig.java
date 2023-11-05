@@ -3,6 +3,7 @@ package lk.ijse.gdse.apigateway.seurity;
 
 import jakarta.servlet.http.HttpServletRequest;
 import lk.ijse.gdse.apigateway.constant.SecurityConstant;
+import lk.ijse.gdse.apigateway.dto.AdminDTO;
 import lk.ijse.gdse.apigateway.dto.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -26,52 +27,54 @@ import java.util.List;
 
 @Component
 public class AuthenticationConfig implements AuthenticationProvider {
-        @Autowired
-        PasswordEncoder passwordEncoder;
-        @Autowired
-        RestTemplate restTemplate;
+    @Autowired
+    PasswordEncoder passwordEncoder;
+    @Autowired
+    RestTemplate restTemplate;
+
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 
-            String userName = authentication.getName();
-            String pwd = authentication.getCredentials().toString();
+        String userName = authentication.getName();
+        String pwd = authentication.getCredentials().toString();
+        System.out.println(userName);
+        ServletRequestAttributes requestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+        HttpHeaders httpHeaders = new HttpHeaders();
+        HttpServletRequest request = requestAttributes.getRequest();
+        httpHeaders.set(HttpHeaders.AUTHORIZATION, request.getHeader(HttpHeaders.AUTHORIZATION));
+        String userEmail = null;
+        String hashPwd = "";
+        String role = "";
+        if (request.getServletPath().startsWith("/api/v1/consume/user")) {
 
-            ServletRequestAttributes requestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-            HttpHeaders httpHeaders = new HttpHeaders();
-            HttpServletRequest request = requestAttributes.getRequest();
-            httpHeaders.set(HttpHeaders.AUTHORIZATION, request.getHeader(HttpHeaders.AUTHORIZATION));
-            String userEmail = null;
-            String hashPwd = "";
-            String role = "";
-            if (request.getServletPath().startsWith("/api/v1/gateway/customer")|| (request.getServletPath().startsWith("/api/v1/gateway/booking"))) {
+            UserDTO userDTO = restTemplate.getForObject("http://deshanz-vivobook:8084/api/v1/user/myEmail?email=" + userName, UserDTO.class);
+            hashPwd = userDTO.getPassword();
+            userEmail = userDTO.getEmail();
+            role = "USER";
+        } else {
+            AdminDTO adminDTO = restTemplate.getForObject("http://deshanz-vivobook:8087/api/v1/admin/search?email=" + userName, AdminDTO.class);
+            hashPwd = adminDTO.getPassword();
 
-                UserDTO customerDTO =
-                hashPwd = customerDTO.getPwd();
-                userEmail = customerDTO.getEmail();
-                role = "USER";
-            } else {
-                UserDTO userDTO = restTemplate.getForObject("http://deshanz-vivobook:8084/api/v1/user/search?id="+userEmail,UserDTO.class);
-
-                hashPwd = userDTO.getPwd();
-                userEmail = userDTO.getEmail();
-                role = userDTO.getRole().name();
-            }
-            if (userEmail != null) {
-                if (passwordEncoder.matches(pwd, hashPwd)) {
-                    return new UsernamePasswordAuthenticationToken(userName, pwd, getGrantedAuthority(role));
-                } else {
-                    throw new BadCredentialsException("Invalid Password");
-                }
-            } else {
-                throw new BadCredentialsException("Invalid User Name");
-            }
+            userEmail = adminDTO.getEmail();
+            role = adminDTO.getRole();
         }
-
-        private Collection<GrantedAuthority> getGrantedAuthority(String role) {
-            List<GrantedAuthority> grantedAuthorityList = new ArrayList<>();
-            grantedAuthorityList.add(new SimpleGrantedAuthority("ROLE_" + role));
-            return grantedAuthorityList;
+        if (userEmail != null) {
+            if (passwordEncoder.matches(pwd, hashPwd)) {
+                return new UsernamePasswordAuthenticationToken(userName, pwd, getGrantedAuthority(role));
+            } else {
+                throw new BadCredentialsException("Invalid Password");
+            }
+        } else {
+            throw new BadCredentialsException("Invalid User Name");
         }
+    }
+
+    private Collection<GrantedAuthority> getGrantedAuthority(String role) {
+        List<GrantedAuthority> grantedAuthorityList = new ArrayList<>();
+        grantedAuthorityList.add(new SimpleGrantedAuthority("ROLE_" + role));
+        return grantedAuthorityList;
+    }
+
     @Override
     public boolean supports(Class<?> authentication) {
         return UsernamePasswordAuthenticationToken.class.isAssignableFrom(authentication);

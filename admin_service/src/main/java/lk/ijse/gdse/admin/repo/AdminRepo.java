@@ -7,3 +7,4 @@ public interface AdminRepo extends JpaRepository<Admin,Long> {
 
    Admin findByEmail(String email);
 }
+

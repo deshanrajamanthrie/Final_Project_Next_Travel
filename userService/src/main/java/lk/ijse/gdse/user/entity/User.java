@@ -23,9 +23,9 @@ public class User {
     private String nic;
     private String address;
 
-    @Column(nullable = false,length = 45)
+    @Column(nullable = false)
     private String email;
-    @Column(nullable = false,length = 45)
+    @Column(nullable = false)
     private String password;
 
     @OneToMany(mappedBy = "user",fetch = FetchType.LAZY,cascade = CascadeType.ALL)

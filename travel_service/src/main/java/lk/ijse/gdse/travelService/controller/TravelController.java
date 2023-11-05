@@ -34,13 +34,13 @@ public class TravelController {
 
 
     @GetMapping(path = "search",params ={"id"} ,produces = MediaType.APPLICATION_JSON_VALUE)
-    public TravelDTO searchTravel(@RequestParam("id") String tId){
+    public TravelDTO searchTravel(@RequestParam("id") Long tId){
         return service.searchTravel(tId);
     }
 
 
     @DeleteMapping(params = {"id"})
-    public void deleteTravel(@RequestParam("id")String tId){
+    public void deleteTravel(@RequestParam("id")Long tId){
         service.deleteTravel(tId);
     }
 

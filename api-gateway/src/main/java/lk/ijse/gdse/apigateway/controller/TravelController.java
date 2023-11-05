@@ -11,7 +11,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.Arrays;
 
-@RequestMapping("api/v1/travel/consume")
+@RequestMapping("api/v1/consume/travel")
 @CrossOrigin
 @RestController
 public class TravelController {
@@ -30,12 +30,12 @@ public class TravelController {
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ResponseUtil>postAllTravel(@RequestBody TravelDTO dto){
-        restTemplate.postForEntity(url,dto,TravelDTO.class);
-        return ResponseEntity.ok(new ResponseUtil(200,"Post Successfully",null));
+        ResponseEntity<TravelDTO> travel = restTemplate.postForEntity(url, dto, TravelDTO.class);
+        return ResponseEntity.ok(new ResponseUtil(200,"Post Successfully",travel));
     }
 
     @GetMapping(params = {"id"},produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ResponseUtil>getTravel(@RequestParam String id){
+    public ResponseEntity<ResponseUtil>getTravel(@RequestParam Long id){
         TravelDTO forObject = restTemplate.getForObject(url+"/search?id=" + id, TravelDTO.class);
         return  ResponseEntity.ok(new ResponseUtil(200,"Get Travel Successfully!",forObject));
     }
@@ -47,7 +47,7 @@ public class TravelController {
     }
 
     @DeleteMapping(params = {"id"})
-    public ResponseEntity<ResponseUtil>  deleteTravel(@RequestParam String id){
+    public ResponseEntity<ResponseUtil>  deleteTravel(@RequestParam Long id){
         restTemplate.delete("http://localhost:8082/api/v1/travel?id="+id,TravelDTO.class);
         return ResponseEntity.ok(new ResponseUtil(200,"Delete Successfully!",null));
     }

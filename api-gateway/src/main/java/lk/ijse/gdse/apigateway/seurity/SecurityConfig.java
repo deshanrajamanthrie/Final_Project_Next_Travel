@@ -2,6 +2,7 @@ package lk.ijse.gdse.apigateway.seurity;
 
 
 import jakarta.servlet.http.HttpServletRequest;
+import lk.ijse.gdse.apigateway.filter.JwtGenerateFilter;
 import lk.ijse.gdse.apigateway.filter.JwtValidateFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -46,11 +47,12 @@ public class SecurityConfig {
                     session.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
                 }).csrf(AbstractHttpConfigurer::disable)
                 .addFilterBefore(new JwtValidateFilter(), BasicAuthenticationFilter.class)
+                .addFilterAfter(new JwtGenerateFilter(), BasicAuthenticationFilter.class)
                 .authorizeHttpRequests(request -> {
-                    request
-                            .requestMatchers("/api/v1/**").permitAll();
-
-                    //   .requestMatchers("/api/v1/user/register").permitAll();
+                    request   /*user/register*/
+                            .requestMatchers("/api/v1/consume/**").permitAll();
+                        /*    .requestMatchers("/api/v1/consume/admin/**")
+                            .hasRole("MANAGER").requestMatchers("/api/v1/consume/**").authenticated();*/
 
                 });
        httpSecurity.httpBasic(Customizer.withDefaults()).formLogin(Customizer.withDefaults());

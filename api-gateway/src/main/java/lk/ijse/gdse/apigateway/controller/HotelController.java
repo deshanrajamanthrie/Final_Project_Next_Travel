@@ -13,7 +13,7 @@ import java.util.Arrays;
 
 @CrossOrigin
 @RestController
-@RequestMapping("api/v1/hotel/consume")
+@RequestMapping("api/v1/consume/hotel")
 public class HotelController {
 
      private final String url="http://deshanz-vivobook:8083/api/v1/hotel";

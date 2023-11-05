@@ -11,7 +11,7 @@ import java.util.Collection;
 @NoArgsConstructor
 @Data
 public class TravelDTO {
-    private String id;
+    private long id;
     private String travelArea;
     private Collection<DateDTO> dates;
     private int countDays;

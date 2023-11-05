@@ -24,22 +24,27 @@ import java.util.Set;
 
 public class JwtGenerateFilter extends OncePerRequestFilter {
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException, IOException {
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if(authentication !=null) {
-
-            SecretKey secretKey = Keys.hmacShaKeyFor(SecurityConstant.SECRET_KEY.getBytes(StandardCharsets.UTF_8));
-
-
+        if(authentication !=null){
+            String issuer="";
+            SecretKey secretKey=null;
+            if (request.getServletPath().startsWith("/api/v1/consume/user")) {
+                secretKey = Keys.hmacShaKeyFor(SecurityConstant.JWT_SECRET_KEY_USER.getBytes(StandardCharsets.UTF_8));
+                issuer="USER";
+            }else{
+                secretKey = Keys.hmacShaKeyFor(SecurityConstant.JWT_SECRET_KEY_ADMIN.getBytes(StandardCharsets.UTF_8));
+                issuer="ADMIN";
+            }
             String newToken = Jwts.builder()
-                    .setIssuer("Deshan")
+                    .setIssuer(issuer)
                     .setSubject("Next-Travel")
                     .claim("username", authentication.getName())
                     .claim("authorities", populateGrantedAuthorities(authentication.getAuthorities()))
                     .setIssuedAt(new Date())
                     .setExpiration(new Date(new Date().getTime() + 604800000))
                     .signWith(secretKey).compact();
-            response.setHeader(HttpHeaders.AUTHORIZATION, newToken);
+            response.setHeader(HttpHeaders.AUTHORIZATION,newToken);
         }
         filterChain.doFilter(request,response);
 

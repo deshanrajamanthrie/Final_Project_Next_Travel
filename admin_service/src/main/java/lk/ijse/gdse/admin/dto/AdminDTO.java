@@ -10,11 +10,9 @@ import lombok.*;
 @Setter
 @ToString
 public class AdminDTO {
-
     private long id;
     private String userName;
     private String role;
-
     private String email;
     private String password;
 }

@@ -11,7 +11,7 @@ import org.springframework.web.client.RestTemplate;
 import java.util.Arrays;
 
 @RestController
-@RequestMapping("api/v1/vehicleCategory/consume")
+@RequestMapping("api/v1/consume/vehicleCategory")
 @CrossOrigin
 public class VehicleCategoryController {
 

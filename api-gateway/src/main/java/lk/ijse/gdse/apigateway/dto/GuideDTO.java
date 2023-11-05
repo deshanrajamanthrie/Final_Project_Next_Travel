@@ -2,6 +2,9 @@ package lk.ijse.gdse.apigateway.dto;
 
 import lombok.*;
 
+/**
+ *
+ */
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter

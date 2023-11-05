@@ -1,7 +1,6 @@
 package lk.ijse.gdse.admin.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.repository.NoRepositoryBean;
 
@@ -10,12 +9,11 @@ import org.springframework.data.repository.NoRepositoryBean;
 @Getter
 @Setter
 @ToString
+@Entity
 public class Admin {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-
-
-
     @Column(nullable = false)
     private String userName;
 

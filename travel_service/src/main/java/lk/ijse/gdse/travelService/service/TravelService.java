@@ -13,8 +13,8 @@ public interface TravelService  {
 
       List<TravelDTO>getAllTravel();
 
-      TravelDTO searchTravel(String id);
+      TravelDTO searchTravel(Long id);
 
 
-      void deleteTravel(String id);
+      void deleteTravel(Long id);
 }
